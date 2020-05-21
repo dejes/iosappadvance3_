@@ -15,23 +15,19 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-
         // Do any additional setup after loading the view.
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     @IBAction func LoginBtn(_ sender: Any) {
-        
         FuncController.shared.LoginFunc(Email: trylogin.username, Password: trylogin.password) { (recieving) in
             switch recieving{
             case .success(let logindata):
                 print(logindata)
                 let storyboard=UIStoryboard(name: "Main", bundle: nil)
                 DispatchQueue.main.async {
-                     let vc = storyboard.instantiateViewController(identifier: "PPageView") as! UIViewController
+                     let vc = 	storyboard.instantiateViewController(identifier: "PPageView") as! UIViewController
                      vc.modalPresentationStyle = .fullScreen
                      self.present(vc, animated: true, completion: nil)
                 }
@@ -46,7 +42,7 @@ class LoginViewController: UIViewController {
                 case .invalidResponse:
                     print(networkError)
                     DispatchQueue.main.async {
-                         let AController=UIAlertController(title: "Login Failed", message: "Please try again.", preferredStyle: .alert)
+                         let AController=UIAlertController(title: "Wrong Password or Email.", message: "Please try again.", preferredStyle: .alert)
                          let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
                          AController.addAction(okAction)
                          self.present(AController, animated: true, completion: nil)

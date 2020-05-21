@@ -44,19 +44,38 @@ class FuncController{
                    
     }
 
-    /*	func RegisterFunc(registerdata:RegisterUser,  completion:@escaping (RegisterUserRecieved?) -> Void){
+    func RegisterFunc(registerdata:RegisterUser,  completion:@escaping (Result< RegisterUserRecieved?,NetworkError>) -> Void){
         let RegisterURL = URL(string: "https://dev-108380.okta.com/api/v1/users?activate=true")!
         var urlRequest = URLRequest(url: RegisterURL)
         urlRequest.httpMethod="POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue("SSWS 00-NaG3a4Y-6GkBMSqbamluvV3wsHFX4T85hiXnM3m", forHTTPHeaderField: "Authorization")
+        urlRequest.setValue("SSWS " + apiToken, forHTTPHeaderField: "Authorization")
         let encoder=JSONEncoder()
-        if let data = try?encoder.encode(RU){
+        if let data = try?encoder.encode(registerdata){
             urlRequest.httpBody=data
-            print(RU)
             URLSession.shared.dataTask(with: urlRequest){ (redata, response, error) in
-                guard error == nil else { print(error!.localizedDescription); return}
+                let qqdata = try? JSONSerialization.jsonObject(with: redata!, options: [])
+                print(qqdata)
+                let decoder = JSONDecoder()
+                
+                if let error = error {
+                    completion(.failure(.requestFailed(error)))
+                }
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    completion(.failure(.invalidResponse))
+                       return
+                   }
+                guard let resdata = try?decoder.decode(RegisterUserRecieved.self, from: redata!)
+                    else{
+                        completion(.failure(.invalidData))
+                        return
+                    }
+                   completion(.success(resdata))
+               }.resume()
+                    
+            }
+               /* guard error == nil else { print(error!.localizedDescription); return}
                 guard let redata = redata else { print("Empty data"); return }
                 let decoder = JSONDecoder()
                 
@@ -71,12 +90,8 @@ class FuncController{
                     completion(nil)
                     
                 }
-                }.resume()
-        }
-        
-        
-        
-    }*/
+                }.resume()*/
+    }
 	
     
 }

@@ -33,42 +33,37 @@ class SignupViewController: UIViewController {
         }
         else{
             
-            let RegisterUserData = RegisterUser(profile:Profile(email: "", login: "12@test.com", nickName: "12", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
-            let encoder = JSONEncoder()
-            let RegisterURL = URL(string: "https://dev-108380.okta.com/api/v1/users?activate=true")!
-            var urlRequest = URLRequest(url: RegisterURL)
-            urlRequest.httpMethod = "POST"
-            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.setValue("SSWS 00-NaG3a4Y-6GkBMSqbamluvV3wsHFX4T85hiXnM3m", forHTTPHeaderField: "Authorization")
-            if let data = try?encoder.encode(RegisterUserData){
-                urlRequest.httpBody = data
-                URLSession.shared.dataTask(with: urlRequest) {(redata, response, error) in
-                    guard error == nil else { print(error!.localizedDescription); return }
-                    guard let redata = redata else { print("Empty data"); return }
-                    let jsondecoder = JSONDecoder()
-                    let rdata = try? JSONSerialization.jsonObject(with: redata, options: [])
-                    print(rdata)
-                    if let resdata = try?jsondecoder.decode(RegisterUserRecieved.self
-                        ,from: redata){
-                        print(resdata)
+            let RegisterUserData = RegisterUser(profile:Profile(email: "12234@test.com", login: "12234@test.com", nickName: "123", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
+            FuncController.shared.RegisterFunc(registerdata: RegisterUserData) { (receiving) in
+                switch receiving{
+                case .success(let RegisterReceive):
+                    print(RegisterReceive)
+                    DispatchQueue.main.async {
+                         let AController=UIAlertController(title: "Sign up successfully!", message: "Please sign in  next page.", preferredStyle: .alert)
+                         let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                         AController.addAction(okAction)
+                         self.present(AController, animated: true, completion: nil)
                     }
-                        
-                }.resume()
-            }
-            
-                
-
-            }
-           
-           /* FuncController.shared.RegisterFunc(registerdata: RegisterUserData) { (RURecieved) in
-                if let RURecieved = RURecieved{
-                    //if RURecieved.status="STAGED"{}
-                    print(RURecieved)
+                case .failure(let networkError):
+                    switch networkError {
+                    case .invalidUrl:
+                        print("invalid url")
+                    case .requestFailed(let error):
+                        print(error)
+                    case .invalidData:
+                        print(networkError)
+                    case .invalidResponse:
+                        print(networkError)
+                        DispatchQueue.main.async {
+                             let AController=UIAlertController(title: "This email has been used!", message: "Please use another email account to sign up or to sign in.", preferredStyle: .alert)
+                             let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                             AController.addAction(okAction)
+                             self.present(AController, animated: true, completion: nil)
+                        }
+                   }
                 }
-            }*/
-        //}
-        
-        
+            }
+        }
     }
     /*
     // MARK: - Navigation

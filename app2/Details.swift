@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case invalidResponse
 }
 
-	
+let apiToken="00-NaG3a4Y-6GkBMSqbamluvV3wsHFX4T85hiXnM3m"
 struct LoginDetails:Encodable {
     var username="jack@test.com"
     var password="Abcd1234"
