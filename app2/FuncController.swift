@@ -12,7 +12,7 @@ class FuncController{
     static let shared = FuncController()
     
     let LoginURL = URL(string: "https://dev-108380.okta.com/api/v1/authn")!
-    func LoginFunc(Email:String, Password:String, completion: @escaping (retd?) -> Void) {
+    func LoginFunc(Email:String, Password:String, completion: @escaping (Result<retd?,NetworkError>) -> Void) {
         var urlRequest = URLRequest(url: LoginURL)
                
                let trylogin2=LoginDetails(username: Email, password: Password)
@@ -20,19 +20,30 @@ class FuncController{
                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                let jsonEncoder=JSONEncoder()
                if let data=try?jsonEncoder.encode(trylogin){
-                   urlRequest.httpBody=data
-                   URLSession.shared.dataTask(with: urlRequest) { (rdata, response, error) in
-                       guard error == nil else { print(error!.localizedDescription); return }
-                       guard let rdata = rdata else { print("Empty data"); return }
-                       let jsondecoder = JSONDecoder()
-                       if let resdata = try?jsondecoder.decode(retd.self, from: rdata) {
-                        completion(resdata)}
-                        else {completion(nil)}
-                   }.resume()
-                   print("123")
+                    urlRequest.httpBody=data
+                    URLSession.shared.dataTask(with: urlRequest) { (rdata, response, error) in
+                        let oo = try? JSONSerialization.jsonObject(with: rdata!, options: [])
+                        print(oo)
+                        
+                        let jsondecoder = JSONDecoder()
+                        if let error = error {
+                             completion(.failure(.requestFailed(error)))
+                        }
+                        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                            completion(.failure(.invalidResponse))
+                            return
+                        }
+                        guard let resdata = try?jsondecoder.decode(retd.self, from: rdata!)
+                            else{
+                                completion(.failure(.invalidData))
+                                return
+                            }
+                        completion(.success(resdata))
+                    }.resume()
+                }
                    
-               }
     }
+
     /*	func RegisterFunc(registerdata:RegisterUser,  completion:@escaping (RegisterUserRecieved?) -> Void){
         let RegisterURL = URL(string: "https://dev-108380.okta.com/api/v1/users?activate=true")!
         var urlRequest = URLRequest(url: RegisterURL)
@@ -66,6 +77,7 @@ class FuncController{
         
         
     }*/
+	
     
 }
 	

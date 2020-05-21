@@ -32,12 +32,8 @@ class SignupViewController: UIViewController {
            present(controller, animated: true, completion: nil)
         }
         else{
-           //var RURecieved=RegisterUserRecieved()
-            //let Profile=profile(email: EmailLabel.text!, login: EmailLabel.text!, nickName: nickNameLabel.text!, gender: GenderSegment.titleForSegment(at: GenderSegment.selectedSegmentIndex)!)
-            //let pwvalue=password(value: PasswordLabel.text!)
-            //let credential=credentials(password: pwvalue)
-            //let RegisterUserData = RegisterUser(profile: Profile	,credentials: credential)
-            let RegisterUserData = RegisterUser(profile:Profile(email: "12@test.com", login: "12@test.com", nickName: "12", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
+            
+            let RegisterUserData = RegisterUser(profile:Profile(email: "", login: "12@test.com", nickName: "12", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
             let encoder = JSONEncoder()
             let RegisterURL = URL(string: "https://dev-108380.okta.com/api/v1/users?activate=true")!
             var urlRequest = URLRequest(url: RegisterURL)

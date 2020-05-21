@@ -9,8 +9,10 @@
 import Foundation
 
 enum NetworkError: Error {
-    case badrequest
     case invalidUrl
+    case requestFailed(Error)
+    case invalidData
+    case invalidResponse
 }
 
 	
@@ -57,9 +59,9 @@ struct Password:Encodable{
     var value:String="123"
 }
 
+
 var trylogin=LoginDetails()
 var LoginData=logindata(data: trylogin)
-
 var tryrecieve=retd()
 //var rdata=ouo(data: tryrecieve)
 

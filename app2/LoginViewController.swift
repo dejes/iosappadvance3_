@@ -26,78 +26,34 @@ class LoginViewController: UIViewController {
     @IBAction func LoginBtn(_ sender: Any) {
         
         FuncController.shared.LoginFunc(Email: trylogin.username, Password: trylogin.password) { (recieving) in
-            if let recieving=recieving{
-                print(recieving)
-                if recieving.status=="SUCCESS"{
-                   DispatchQueue.main.async {
-                       let storyboard=UIStoryboard(name: "Main", bundle: nil)
-                       let vc = storyboard.instantiateViewController(identifier: "PPageView") as! UIViewController
-                       vc.modalPresentationStyle = .fullScreen
-                       self.present(vc, animated: true, completion: nil)
-                   }
-               }
-               else {
-                   DispatchQueue.main.async {
-                       let AController=UIAlertController(title: "Login Failed", message: "Please try again.", preferredStyle: .alert)
-                       let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
-                       AController.addAction(okAction)
-                       self.present(AController, animated: true, completion: nil)
-                   }
-               }
+            switch recieving{
+            case .success(let logindata):
+                print(logindata)
+                let storyboard=UIStoryboard(name: "Main", bundle: nil)
+                DispatchQueue.main.async {
+                     let vc = storyboard.instantiateViewController(identifier: "PPageView") as! UIViewController
+                     vc.modalPresentationStyle = .fullScreen
+                     self.present(vc, animated: true, completion: nil)
+                }
+            case .failure(let networkError):
+                switch networkError {
+                case .invalidUrl:
+                    print("invalid url")
+                case .requestFailed(let error):
+                    print(error)
+                case .invalidData:
+                    print(networkError)
+                case .invalidResponse:
+                    print(networkError)
+                    DispatchQueue.main.async {
+                         let AController=UIAlertController(title: "Login Failed", message: "Please try again.", preferredStyle: .alert)
+                         let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                         AController.addAction(okAction)
+                         self.present(AController, animated: true, completion: nil)
+                    }
+                }
             }
         }
-        /*let LoginURL = URL(string: "https://dev-108380.okta.com/api/v1/authn")!
-        var urlRequest = URLRequest(url: LoginURL)
-        
-        let trylogin2=LoginDetails(username: UserNameTF.text!, password: PasswordTF.text!)
-        
-        urlRequest.httpMethod = "POST"
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let jsonEncoder=JSONEncoder()
-        if let data=try?jsonEncoder.encode(trylogin){
-            //print(LoginData)
-            urlRequest.httpBody=data
-
-            URLSession.shared.dataTask(with: urlRequest) { (rdata, response, error) in
-                guard error == nil else { print(error!.localizedDescription); return }
-                guard let rdata = rdata else { print("Empty data"); return }
-                let jsondecoder = JSONDecoder()
-                /*if let str = String(data: rdata, encoding: .utf8) {
-                    print(str)
-                }*/
-                if let resdata = try?jsondecoder.decode(retd.self, from: rdata) {
-                    print(resdata.status)
-                    if resdata.status=="SUCCESS"{
-                        DispatchQueue.main.async {
-                            let storyboard=UIStoryboard(name: "Main", bundle: nil)
-                            let vc = storyboard.instantiateViewController(identifier: "PPageView") as! UIViewController
-                            vc.modalPresentationStyle = .fullScreen
-                            self.present(vc, animated: true, completion: nil)
-                            //(navcon, animated: true, completion: nil)
- 
-                        }
-                    }
-                    else {
-                        DispatchQueue.main.async {
-                            let AController=UIAlertController(title: "Login Failed", message: "Please try again.", preferredStyle: .alert)
-                            let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
-                            AController.addAction(okAction)
-                            self.present(AController, animated: true, completion: nil)
-                            
-                        }
-                    }
-                    
-                }
-                
-                
-            }.resume()
-            print("123")
-            
-        
-            
-        }*/
-       
-        
     }
     
     /*
