@@ -10,7 +10,7 @@ import UIKit
 
 class SignupViewController: UIViewController {
    
-    
+    var userid:String?
     @IBOutlet weak var EmailLabel: UITextField!
     @IBOutlet weak var PasswordLabel: UITextField!
     @IBOutlet weak var nickNameLabel: UITextField!
@@ -33,16 +33,17 @@ class SignupViewController: UIViewController {
         }
         else{
             
-            let RegisterUserData = RegisterUser(profile:Profile(email: "12234@test.com", login: "12234@test.com", nickName: "123", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
+            let RegisterUserData = RegisterUser(profile:Profile(email: "1332@test.com", login: "1332@test.com", nickName: "neverloses", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
             FuncController.shared.RegisterFunc(registerdata: RegisterUserData) { (receiving) in
                 switch receiving{
                 case .success(let RegisterReceive):
                     print(RegisterReceive)
                     DispatchQueue.main.async {
-                         let AController=UIAlertController(title: "Sign up successfully!", message: "Please sign in  next page.", preferredStyle: .alert)
+                         let AController=UIAlertController(title: "Sign up successfully!", message: "Please sign in next page.", preferredStyle: .alert)
                          let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
-                         AController.addAction(okAction)
-                         self.present(AController, animated: true, completion: nil)
+                         self.userid=RegisterReceive?.id
+                         self.performSegue(withIdentifier: "ToPPage", sender: nil)
+                        
                     }
                 case .failure(let networkError):
                     switch networkError {
@@ -65,14 +66,16 @@ class SignupViewController: UIViewController {
             }
         }
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let controller = segue.destination as? PersonalPageViewController
+        controller?.userid=userid
     }
-    */
+    
 
 }

@@ -9,11 +9,12 @@
 import UIKit
 
 class ProfileTableViewController: UITableViewController {
-
+    var userid:String?
     @IBOutlet weak var EmailLabel: UILabel!
     @IBOutlet weak var GenderLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+    
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -21,6 +22,7 @@ class ProfileTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
 
     // MARK: - Table view data source
 /*

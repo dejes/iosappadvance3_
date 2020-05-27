@@ -24,7 +24,6 @@ class FuncController{
                     URLSession.shared.dataTask(with: urlRequest) { (rdata, response, error) in
                         let oo = try? JSONSerialization.jsonObject(with: rdata!, options: [])
                         print(oo)
-                        
                         let jsondecoder = JSONDecoder()
                         if let error = error {
                              completion(.failure(.requestFailed(error)))
@@ -75,22 +74,6 @@ class FuncController{
                }.resume()
                     
             }
-               /* guard error == nil else { print(error!.localizedDescription); return}
-                guard let redata = redata else { print("Empty data"); return }
-                let decoder = JSONDecoder()
-                
-                if let RegisterReturn = try?decoder.decode(RegisterUserRecieved.self, from: redata){
-                    print(redata)
-                    print(error)
-                    print(RegisterReturn)
-                    completion(RegisterReturn)
-                }
-                else {
-                    print("failed")
-                    completion(nil)
-                    
-                }
-                }.resume()*/
     }
 	
     

@@ -24,10 +24,16 @@ struct logindata:Encodable {
     var data:LoginDetails
 }
 struct retd:Decodable {
-    var id:String?
+    var _embedded:emb
     var status:String?
     var expiresAt:String?
     var sessionToken:String?
+    struct emb:Decodable {
+        var user:user
+        struct user:Decodable {
+            var id:String?
+        }
+    }
 }
 struct user:Decodable{
     var id:String?
@@ -58,11 +64,20 @@ struct Credentials:Encodable {
 struct Password:Encodable{
     var value:String="123"
 }
+struct SelfPage:Decodable {
+    var profile:profiledecode
 
+    struct profiledecode:Decodable{
+        var email:String?
+        var login:String?
+        var nickName:String?
+        var gender:String?
+    }
+}
 
 var trylogin=LoginDetails()
 var LoginData=logindata(data: trylogin)
-var tryrecieve=retd()
+//var tryrecieve=retd()
 //var rdata=ouo(data: tryrecieve)
 
 
