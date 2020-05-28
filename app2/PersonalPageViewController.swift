@@ -13,6 +13,9 @@ class PersonalPageViewController: UIViewController {
     @IBOutlet weak var NicknameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.modalPresentationStyle = .fullScreen
+
         print("1234")
         print(userid!)
         let ProfileURL = URL(string: "https://dev-108380.okta.com/api/v1/users/" + userid! )!

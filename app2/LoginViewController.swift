@@ -64,9 +64,12 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        let controller = segue.destination as? PersonalPageViewController
-        print(userid)
-        controller?.userid=userid
+        if segue.identifier == "ToPPageLogin" {
+            let navController = segue.destination as! UINavigationController
+            let detailController = navController.topViewController as! PersonalPageViewController
+            detailController.userid = userid!
+        }
+
     }
     
 
