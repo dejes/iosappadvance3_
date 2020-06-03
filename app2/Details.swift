@@ -64,10 +64,10 @@ struct Credentials:Encodable {
 struct Password:Encodable{
     var value:String="123"
 }
-struct SelfPage:Decodable {
+struct SelfPage:Codable {
     var profile:profiledecode
 	
-    struct profiledecode:Decodable{
+    struct profiledecode:Codable{
         var email:String?
         var login:String?
         var nickName:String?

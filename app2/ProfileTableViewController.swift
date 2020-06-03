@@ -9,12 +9,14 @@
 import UIKit
 
 class ProfileTableViewController: UITableViewController {
+    @IBOutlet var profileDetail: [UILabel]!
     var userid:String?
-    @IBOutlet weak var EmailLabel: UILabel!
-    @IBOutlet weak var GenderLabel: UILabel!
+    var selfpage:SelfPage?
+  /*  @IBOutlet weak var EmailLabel: UILabel!
+    @IBOutlet weak var GenderLabel: UILabel!*/
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -22,7 +24,26 @@ class ProfileTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = UIAlertController(title: "Edit", message: nil  , preferredStyle: .alert)
+        controller.addTextField { (textfield) in
+        }
+        let okaction = UIAlertAction(title: "OK", style: .default) { (alertaction) in
+            print(controller.textFields?[0].text)
+            self.profileDetail[indexPath.row].text=controller.textFields![0].text
+            self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: self.profileDetail[0].text!, login: self.profileDetail[0].text!, nickName: self.profileDetail[2].text!, gender: self.profileDetail[1].text!))
+            
+        }
+        let cancelaction = UIAlertAction(title: "cancel", style: .default) { (alertaction) in
+            
+            
+        }
+        controller.addAction(okaction)
+        controller.addAction(cancelaction)
+        present(controller, animated: true, completion: nil)
+        print(indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
 
     // MARK: - Table view data source
 /*

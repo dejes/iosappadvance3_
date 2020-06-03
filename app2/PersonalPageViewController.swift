@@ -17,14 +17,34 @@ class PersonalPageViewController: UIViewController {
         self.modalPresentationStyle = .fullScreen
         FuncController.shared.getProfile(userid: userid!) { (receiving) in
             switch receiving{
-            case .success: (let ProfileData)
-                self.NicknameLabel.text = rrdata.profile.nickName
-                let controller = self.children[0] as? ProfileTableViewController
-                controller?.EmailLabel.text=rrdata.profile.email
-                controller?.GenderLabel.text=rrdata.profile.gender
-                
-            case .failure(_):
-                <#code#>
+            case .success (let ProfileData):
+                DispatchQueue.main.async{
+                     self.NicknameLabel.text = ProfileData?.profile.nickName
+                     let controller = self.children[0] as? ProfileTableViewController
+                    print(ProfileData)
+                    controller?.profileDetail[0].text=ProfileData?.profile.email
+                    controller?.profileDetail[1].text=ProfileData?.profile.gender
+                    controller?.profileDetail[2].text=ProfileData?.profile.nickName
+                    controller?.selfpage=ProfileData
+                }
+
+            case .failure(let networkError):
+                switch networkError {
+                 case .invalidUrl:
+                     print("invalid url")
+                 case .requestFailed(let error):
+                     print(error)
+                 case .invalidData:
+                     print(networkError)
+                 case .invalidResponse:
+                     print(networkError)
+                     DispatchQueue.main.async {
+                          let AController=UIAlertController(title: "This email has been used!", message: "Please use another email account to sign up or to sign in.", preferredStyle: .alert)
+                          let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                          AController.addAction(okAction)
+                          self.present(AController, animated: true, completion: nil)
+                     }
+                }
             }
             
         }
