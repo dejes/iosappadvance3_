@@ -33,7 +33,7 @@ class SignupViewController: UIViewController {
         }
         else{
             
-            let RegisterUserData = RegisterUser(profile:Profile(email: "1332@test.com", login: "1332@test.com", nickName: "neverloses", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
+            let RegisterUserData = RegisterUser(profile:Profile(email: "1332120@test.com", login: "1332120@test.com", nickName: "neverloses", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
             FuncController.shared.RegisterFunc(registerdata: RegisterUserData) { (receiving) in
                 switch receiving{
                 case .success(let RegisterReceive):
@@ -42,7 +42,7 @@ class SignupViewController: UIViewController {
                          let AController=UIAlertController(title: "Sign up successfully!", message: "Please sign in next page.", preferredStyle: .alert)
                          let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
                          self.userid=RegisterReceive?.id
-                         self.performSegue(withIdentifier: "ToPPage", sender: nil)
+                         self.performSegue(withIdentifier: "ToPPageSignup", sender: nil)
                         
                     }
                 case .failure(let networkError):
@@ -73,8 +73,11 @@ class SignupViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        let controller = segue.destination as? PersonalPageViewController
-        controller?.userid=userid
+       if segue.identifier == "ToPPageSignup" {
+            let navController = segue.destination as! UINavigationController
+            let detailController = navController.topViewController as! PersonalPageViewController
+            detailController.userid = userid!
+        }
     }
     
 

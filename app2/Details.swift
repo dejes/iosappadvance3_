@@ -53,8 +53,8 @@ struct RegisterUserRecieved:Decodable {
     var created:String?
 }
 struct Profile:Encodable {
-    var email:String="11@test.com"
-    var login:String="11@test.com"
+    var email:String="112@test.com"
+    var login:String="112@test.com"
     var nickName:String="11"
     var gender:String="female"
 }
@@ -66,7 +66,7 @@ struct Password:Encodable{
 }
 struct SelfPage:Decodable {
     var profile:profiledecode
-
+	
     struct profiledecode:Decodable{
         var email:String?
         var login:String?

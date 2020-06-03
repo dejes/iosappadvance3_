@@ -348,7 +348,6 @@
                         <barButtonItem key="rightBarButtonItem" title="Send" id="WoG-aj-e9c">
                             <connections>
                                 <action selector="RegisterBtn:" destination="ggX-sI-aXB" id="LXZ-4D-vf7"/>
-                                <segue destination="7fV-EC-Lmu" kind="show" id="R8X-m5-AvZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -357,6 +356,7 @@
                         <outlet property="GenderSegment" destination="pCj-3k-Nu5" id="tbL-hg-umx"/>
                         <outlet property="PasswordLabel" destination="HOe-Vj-IOe" id="A8a-s8-rtM"/>
                         <outlet property="nickNameLabel" destination="Hdp-Ub-42y" id="v6V-Tx-5qI"/>
+                        <segue destination="7fV-EC-Lmu" kind="show" identifier="ToPPageSignup" id="9Mk-8v-6UD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feg-98-h7t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -384,7 +384,7 @@
         <!--Navigation Controller-->
         <scene sceneID="F7O-cc-oNy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fV-EC-Lmu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="7fV-EC-Lmu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9ae-lY-vBV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="12B-ec-zvZ">
@@ -406,6 +406,6 @@
         <image name="pencil" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AI3-od-jTY"/>
+        <segue reference="9Mk-8v-6UD"/>
     </inferredMetricsTieBreakers>
 </document>

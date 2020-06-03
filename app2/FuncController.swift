@@ -22,13 +22,18 @@ class FuncController{
                if let data=try?jsonEncoder.encode(trylogin){
                     urlRequest.httpBody=data
                     URLSession.shared.dataTask(with: urlRequest) { (rdata, response, error) in
-                        let oo = try? JSONSerialization.jsonObject(with: rdata!, options: [])
-                        print(oo)
+                        print("******")
+                        /*let oo = try? JSONSerialization.jsonObject(with: rdata!, options: [])
+                        print(oo)*/
                         let jsondecoder = JSONDecoder()
                         if let error = error {
                              completion(.failure(.requestFailed(error)))
                         }
                         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                            /*if let res = response as? HTTPURLResponse{
+                                print(res.statusCode)
+                            }*/
+                            print("-----")
                             completion(.failure(.invalidResponse))
                             return
                         }
@@ -62,6 +67,7 @@ class FuncController{
                     completion(.failure(.requestFailed(error)))
                 }
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    
                     completion(.failure(.invalidResponse))
                        return
                    }
@@ -74,6 +80,34 @@ class FuncController{
                }.resume()
                     
             }
+    }
+    func getProfile(userid:String, completion:@escaping(Result<SelfPage?,NetworkError>) -> Void ){
+        let ProfileURL = URL(string: "https://dev-108380.okta.com/api/v1/users/" + userid )
+        var urlRequest = URLRequest(url: ProfileURL!)
+        urlRequest.httpMethod="GET"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("SSWS " + apiToken, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: urlRequest){(redata, response, error) in
+            let qqdata = try? JSONSerialization.jsonObject(with: redata!, options: [])
+            print(qqdata)
+
+            let decoder = JSONDecoder()
+            if let error = error {
+               completion(.failure(.requestFailed(error)))
+            }
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+                else {
+               completion(.failure(.invalidResponse))
+                  return
+            }
+            guard let resdata = try?decoder.decode(SelfPage.self, from: redata!)
+                else{
+                   completion(.failure(.invalidData))
+                   return
+               }
+              completion(.success(resdata))
+        }.resume()
     }
 	
     

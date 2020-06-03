@@ -13,10 +13,22 @@ class PersonalPageViewController: UIViewController {
     @IBOutlet weak var NicknameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.modalPresentationStyle = .fullScreen
-
-        print("1234")
+        FuncController.shared.getProfile(userid: userid!) { (receiving) in
+            switch receiving{
+            case .success: (let ProfileData)
+                self.NicknameLabel.text = rrdata.profile.nickName
+                let controller = self.children[0] as? ProfileTableViewController
+                controller?.EmailLabel.text=rrdata.profile.email
+                controller?.GenderLabel.text=rrdata.profile.gender
+                
+            case .failure(_):
+                <#code#>
+            }
+            
+        }
+        /*print("1234")
         print(userid!)
         let ProfileURL = URL(string: "https://dev-108380.okta.com/api/v1/users/" + userid! )!
         var urlRequest = URLRequest(url: ProfileURL)
@@ -45,7 +57,7 @@ class PersonalPageViewController: UIViewController {
                 print(error?.localizedDescription)
             }
             
-        }.resume()
+        }.resume()*/
         // Do any additional setup after loading the view.
     }
     /*func GetProfile(){
