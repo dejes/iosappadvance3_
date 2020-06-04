@@ -8,9 +8,10 @@
 
 import UIKit
 
-class PersonalPageViewController: UIViewController {
+class PersonalPageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var userid:String?
-    @IBOutlet weak var NicknameLabel: UILabel!
+
+    @IBOutlet weak var ProfilePicBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,12 +20,13 @@ class PersonalPageViewController: UIViewController {
             switch receiving{
             case .success (let ProfileData):
                 DispatchQueue.main.async{
-                     self.NicknameLabel.text = ProfileData?.profile.nickName
+
                      let controller = self.children[0] as? ProfileTableViewController
                     print(ProfileData)
                     controller?.profileDetail[0].text=ProfileData?.profile.email
                     controller?.profileDetail[1].text=ProfileData?.profile.gender
                     controller?.profileDetail[2].text=ProfileData?.profile.nickName
+                    controller?.userid=self.userid!
                     controller?.selfpage=ProfileData
                 }
 
@@ -46,45 +48,21 @@ class PersonalPageViewController: UIViewController {
                      }
                 }
             }
-            
         }
-        /*print("1234")
-        print(userid!)
-        let ProfileURL = URL(string: "https://dev-108380.okta.com/api/v1/users/" + userid! )!
-        var urlRequest = URLRequest(url: ProfileURL)
-        urlRequest.httpMethod="GET"
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue("SSWS " + apiToken, forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: urlRequest){(redata, response, error) in
-            let qqdata = try? JSONSerialization.jsonObject(with: redata!, options: [])
-            
-            print("**********")
-            print(qqdata)
-            print("**********")
-            let decoder = JSONDecoder()
-            if let rrdata = try? decoder.decode(SelfPage.self, from: redata!)
-            {
-                DispatchQueue.main.async {
-                    self.NicknameLabel.text = rrdata.profile.nickName
-                    let controller = self.children[0] as? ProfileTableViewController
-                    controller?.EmailLabel.text=rrdata.profile.email
-                    controller?.GenderLabel.text=rrdata.profile.gender
-                }
-            }
-            else{
-                print(error?.localizedDescription)
-            }
-            
-        }.resume()*/
-        // Do any additional setup after loading the view.
     }
-    /*func GetProfile(){
-        print("123")
-        
-    }*/
-/*
+    weak open var delegate: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)?
+    let photopicker = UIImagePickerController()
+    @IBAction func ChangeProfilePic(_ sender: UIButton) {
+        photopicker.sourceType = .photoLibrary
+        photopicker.delegate = self
+        self.present(photopicker,animated: true)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        ProfilePicBtn.setImage(image, for: .normal)
+        photopicker.dismiss(animated: true, completion: nil)
+    }
+    /*
     
     // MARK: - Navigation
 

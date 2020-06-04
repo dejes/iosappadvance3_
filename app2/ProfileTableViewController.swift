@@ -30,12 +30,52 @@ class ProfileTableViewController: UITableViewController {
         }
         let okaction = UIAlertAction(title: "OK", style: .default) { (alertaction) in
             print(controller.textFields?[0].text)
-            self.profileDetail[indexPath.row].text=controller.textFields![0].text
-            self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: self.profileDetail[0].text!, login: self.profileDetail[0].text!, nickName: self.profileDetail[2].text!, gender: self.profileDetail[1].text!))
+            /*self.profileDetail[indexPath.row].text=controller.textFields![0].text*/
+            
+            switch indexPath.row{
+            case 0:
+                self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: controller.textFields![0].text, login: controller.textFields![0].text, nickName: nil, gender: nil))
+                break
+            case 2:
+                self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: nil, login: nil, nickName: controller.textFields![0].text , gender: nil))
+            default:
+                break;
+            }
+            FuncController.shared.updateprofile(selfpage: self.selfpage!, userid: self.userid!) { (receiveing) in
+                switch receiveing{
+                case .success(let Profiledata):
+                    DispatchQueue.main.async {
+                        self.profileDetail[0].text = Profiledata?.profile.email
+                        self.profileDetail[2].text = Profiledata?.profile.nickName
+                    }
+                    
+                    break
+                case .failure(let networkError):
+                    switch networkError {
+                     case .invalidUrl:
+                         print("invalid url")
+                     case .requestFailed(let error):
+                         print(error)
+                     case .invalidData:
+                         print(networkError)
+                     case .invalidResponse:
+                         print(networkError)
+                         DispatchQueue.main.async {
+                              let AController=UIAlertController(title: "error", message: nil, preferredStyle: .alert)
+                              let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                              AController.addAction(okAction)
+                              self.present(AController, animated: true, completion: nil)
+                         }
+                    }
+                }
+                
+            }
+            
+            
+           
             
         }
-        let cancelaction = UIAlertAction(title: "cancel", style: .default) { (alertaction) in
-            
+        let cancelaction = UIAlertAction(title: "cancel", style: .default) { (alertaction) in	      
             
         }
         controller.addAction(okaction)
