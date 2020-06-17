@@ -10,16 +10,41 @@ import UIKit
 
 class LoginViewController: UIViewController {
     var userid:String?
+    var storeuserid:String?
+    let userDefault = UserDefaults()
     
     @IBOutlet weak var UserNameTF: UITextField!
     @IBOutlet weak var PasswordTF: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       // if(userDefault.value(forKey: "userid"))
+       if userDefault.value(forKey: "userid") != nil {
+            storeuserid = userDefault.value(forKey: "userid") as? String
+             userid = storeuserid
+             jumpking()
+            
+        }
+     /*  let storeuserid = userDefault.value(forKey: "userid") as! String
+       // if userDefault.value(forKey: "userid") != n
+        if storeuserid != nil{
+            
+        }*/
+        /*
+        if let storeuserid = userDefault.value(forKey: "userid") as? String{
+            userid = storeuserid
+            self.performSegue(withIdentifier:"ToPPageLogin" , sender: nil)
+        }*/
         // Do any additional setup after loading the view.
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    func jumpking() {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier:"ToPPageLogin" , sender: nil)
+        }
+        
     }
     @IBAction func LoginBtn(_ sender: Any) {
         FuncController.shared.LoginFunc(Email: trylogin.username, Password: trylogin.password) { (recieving) in

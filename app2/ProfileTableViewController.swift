@@ -30,14 +30,12 @@ class ProfileTableViewController: UITableViewController {
         }
         let okaction = UIAlertAction(title: "OK", style: .default) { (alertaction) in
             print(controller.textFields?[0].text)
-            /*self.profileDetail[indexPath.row].text=controller.textFields![0].text*/
-            
             switch indexPath.row{
             case 0:
-                self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: controller.textFields![0].text, login: controller.textFields![0].text, nickName: nil, gender: nil))
+                self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: controller.textFields![0].text, login: controller.textFields![0].text))
                 break
             case 2:
-                self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: nil, login: nil, nickName: controller.textFields![0].text , gender: nil))
+                self.selfpage=SelfPage(profile: SelfPage.profiledecode(nickName: controller.textFields![0].text))
             default:
                 break;
             }
@@ -48,8 +46,6 @@ class ProfileTableViewController: UITableViewController {
                         self.profileDetail[0].text = Profiledata?.profile.email
                         self.profileDetail[2].text = Profiledata?.profile.nickName
                     }
-                    
-                    break
                 case .failure(let networkError):
                     switch networkError {
                      case .invalidUrl:
@@ -67,16 +63,10 @@ class ProfileTableViewController: UITableViewController {
                               self.present(AController, animated: true, completion: nil)
                          }
                     }
-                }
-                
+                }                
             }
-            
-            
-           
-            
         }
-        let cancelaction = UIAlertAction(title: "cancel", style: .default) { (alertaction) in	      
-            
+        let cancelaction = UIAlertAction(title: "cancel", style: .default) { (alertaction) in
         }
         controller.addAction(okaction)
         controller.addAction(cancelaction)

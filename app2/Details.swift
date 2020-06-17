@@ -72,7 +72,14 @@ struct SelfPage:Codable {
         var login:String?
         var nickName:String?
         var gender:String?
+        var profileImg:String?
     }
+}
+struct UploadImageResult: Decodable {
+    struct Data: Decodable {
+        let link: URL
+    }
+    let data: Data
 }
 
 var trylogin=LoginDetails()

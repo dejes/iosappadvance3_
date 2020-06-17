@@ -89,16 +89,16 @@
                                     <segue destination="6nt-qK-1MV" kind="embed" id="cCe-iM-3nO"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLT-n8-ZSI">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLT-n8-ZSI">
                                 <rect key="frame" x="117" y="138" width="180" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="AWk-gj-UIV"/>
                                     <constraint firstAttribute="height" constant="180" id="EK1-M1-sIZ"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="owow-removebg-preview"/>
+                                <state key="normal" title="Button" image="142"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="85"/>
+                                        <integer key="value" value="90"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -390,9 +390,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="owow-removebg-preview" width="497" height="502"/>
+        <image name="142" width="1000" height="1500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9Mk-8v-6UD"/>
+        <segue reference="AI3-od-jTY"/>
     </inferredMetricsTieBreakers>
 </document>
