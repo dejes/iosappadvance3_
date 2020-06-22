@@ -81,7 +81,15 @@ struct UploadImageResult: Decodable {
     }
     let data: Data
 }
-
+struct changepassword:Codable{
+    var oldPassword:String!
+    var newPassword:String!
+}
+struct pwdreturn:Codable {
+    var password:pp?
+    struct pp:Codable {
+    }
+}
 var trylogin=LoginDetails()
 var LoginData=logindata(data: trylogin)
 //var tryrecieve=retd()

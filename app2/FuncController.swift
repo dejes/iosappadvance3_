@@ -143,6 +143,39 @@ class FuncController{
                 }.resume()
             }
     }
+    func changepasswordfunc(change:changepassword, userid:String, completion: @escaping (Result<pwdreturn?,NetworkError>) -> Void ){
+        let url = URL(string: "https://dev-108380.okta.com/api/v1/users/" + userid + "/credentials/change_password")
+        var urlRequest = URLRequest(url: url!)
+        urlRequest.httpMethod="POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("SSWS " + apiToken, forHTTPHeaderField: "Authorization")
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(change){
+            urlRequest.httpBody=data
+            URLSession.shared.dataTask(with: urlRequest){(redata, response, error) in
+               let qqdata = try? JSONSerialization.jsonObject(with: redata!, options: [])
+               print(qqdata)
+               let decoder = JSONDecoder()
+               
+               if let error = error {
+                   completion(.failure(.requestFailed(error)))
+               }
+               guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                   
+                   completion(.failure(.invalidResponse))
+                      return
+                  }
+               guard let resdata = try?decoder.decode(pwdreturn.self, from: redata!)
+                   else{
+                       completion(.failure(.invalidData))
+                       return
+                   }
+                  completion(.success(resdata))
+            }.resume()
+        }
+    }
+
 	
     
 }

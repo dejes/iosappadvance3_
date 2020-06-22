@@ -53,9 +53,6 @@ class LoginViewController: UIViewController {
                 print(logindata)
                 //let storyboard=UIStoryboard(name: "Main", bundle: nil)
                 DispatchQueue.main.async {
-                    /* let vc = 	storyboard.instantiateViewController(identifier: "PPageView") as! UIViewController
-                     vc.modalPresentationStyle = .fullScreen
-                     self.present(vc, animated: true, completion: nil)*/
                     self.userid = logindata?._embedded.user.id
                     print("****\n"+(self.userid)!+"\n****")
                     self.performSegue(withIdentifier: "ToPPageLogin", sender: nil)
@@ -90,8 +87,9 @@ class LoginViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "ToPPageLogin" {
-            let navController = segue.destination as! UINavigationController
-            let detailController = navController.topViewController as! PersonalPageViewController
+            //let navController = segue.destination as! UINavigationController            
+            let tabController = segue.destination as! UITabBarController
+            let detailController = tabController.viewControllers![0] as! PersonalPageViewController
             detailController.userid = userid!
         }
 

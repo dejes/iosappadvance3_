@@ -26,45 +26,119 @@ class ProfileTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = UIAlertController(title: "Edit", message: nil  , preferredStyle: .alert)
-        controller.addTextField { (textfield) in
+        
+        if indexPath.row == 3{
+            controller.addTextField { (textfield) in
+                textfield.placeholder = "Old Password"
+            }
+            controller.addTextField { (textfield) in
+                textfield.placeholder = "New Password"
+            }
+        }
+        else{
+            controller.addTextField { (textfield) in
+            }
         }
         let okaction = UIAlertAction(title: "OK", style: .default) { (alertaction) in
             print(controller.textFields?[0].text)
             switch indexPath.row{
             case 0:
                 self.selfpage=SelfPage(profile: SelfPage.profiledecode(email: controller.textFields![0].text, login: controller.textFields![0].text))
+                FuncController.shared.updateprofile(selfpage: self.selfpage!, userid: self.userid!) { (receiveing) in
+                    switch receiveing{
+                    case .success(let Profiledata):
+                        DispatchQueue.main.async {
+                            self.profileDetail[0].text = Profiledata?.profile.email
+                            //self.profileDetail[2].text = Profiledata?.profile.nickName
+                        }
+                    case .failure(let networkError):
+                        switch networkError {
+                         case .invalidUrl:
+                             print("invalid url")
+                         case .requestFailed(let error):
+                             print(error)
+                         case .invalidData:
+                             print(networkError)
+                         case .invalidResponse:
+                             print(networkError)
+                             DispatchQueue.main.async {
+                                  let AController=UIAlertController(title: "error", message: nil, preferredStyle: .alert)
+                                  let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                                  AController.addAction(okAction)
+                                  self.present(AController, animated: true, completion: nil)
+                             }
+                        }
+                    }
+                }
                 break
             case 2:
                 self.selfpage=SelfPage(profile: SelfPage.profiledecode(nickName: controller.textFields![0].text))
+                FuncController.shared.updateprofile(selfpage: self.selfpage!, userid: self.userid!) { (receiveing) in
+                    switch receiveing{
+                    case .success(let Profiledata):
+                        DispatchQueue.main.async {
+                           // self.profileDetail[0].text = Profiledata?.profile.email
+                            self.profileDetail[2].text = Profiledata?.profile.nickName
+                        }
+                    case .failure(let networkError):
+                        switch networkError {
+                         case .invalidUrl:
+                             print("invalid url")
+                         case .requestFailed(let error):
+                             print(error)
+                         case .invalidData:
+                             print(networkError)
+                         case .invalidResponse:
+                             print(networkError)
+                             DispatchQueue.main.async {	
+                                  let AController=UIAlertController(title: "error", message: nil, preferredStyle: .alert)
+                                  let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                                  AController.addAction(okAction)
+                                  self.present(AController, animated: true, completion: nil)
+                             }
+                        }
+                    }
+                }
+            case 3:
+                controller.addTextField { (textfield) in }
+                controller.addTextField { (textfield) in }
+                let cpwd = changepassword(oldPassword: controller.textFields![0].text, newPassword: controller.textFields![1].text)
+                FuncController.shared.changepasswordfunc(change: cpwd, userid: self.userid!) { (receiveing) in
+                    switch receiveing{
+                    case .success(let Profiledata):
+                        DispatchQueue.main.async {
+                            let AController=UIAlertController(title: "Yeah!", message: "Your password has successfully changed!", preferredStyle: .alert)
+                            let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                            AController.addAction(okAction)
+                            self.present(AController, animated: true, completion: nil)
+                        }
+                    case .failure(let networkError):
+                        switch networkError {
+                         case .invalidUrl:
+                             print("invalid url")
+                         case .requestFailed(let error):
+                             print(error)
+                         case .invalidData:
+                             print(networkError)
+                         case .invalidResponse:
+                             print(networkError)
+                             DispatchQueue.main.async {
+                                  let AController=UIAlertController(title: "error", message: nil, preferredStyle: .alert)
+                                  let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                                  AController.addAction(okAction)
+                                  self.present(AController, animated: true, completion: nil)
+                             }
+                        }
+                    }
+                }
+                
+                
+                
             default:
                 break;
             }
-            FuncController.shared.updateprofile(selfpage: self.selfpage!, userid: self.userid!) { (receiveing) in
-                switch receiveing{
-                case .success(let Profiledata):
-                    DispatchQueue.main.async {
-                        self.profileDetail[0].text = Profiledata?.profile.email
-                        self.profileDetail[2].text = Profiledata?.profile.nickName
-                    }
-                case .failure(let networkError):
-                    switch networkError {
-                     case .invalidUrl:
-                         print("invalid url")
-                     case .requestFailed(let error):
-                         print(error)
-                     case .invalidData:
-                         print(networkError)
-                     case .invalidResponse:
-                         print(networkError)
-                         DispatchQueue.main.async {
-                              let AController=UIAlertController(title: "error", message: nil, preferredStyle: .alert)
-                              let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
-                              AController.addAction(okAction)
-                              self.present(AController, animated: true, completion: nil)
-                         }
-                    }
-                }                
-            }
+            
+            
         }
         let cancelaction = UIAlertAction(title: "cancel", style: .default) { (alertaction) in
         }
