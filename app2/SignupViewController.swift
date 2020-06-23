@@ -33,7 +33,7 @@ class SignupViewController: UIViewController {
         }
         else{
             
-            let RegisterUserData = RegisterUser(profile:Profile(email: "1332120@test.com", login: "1332120@test.com", nickName: "neverloses", gender: "female"), credentials: Credentials(password: Password(value: "Abcd1234")))
+            let RegisterUserData = RegisterUser(profile:Profile(email: EmailLabel.text!, login: EmailLabel.text!, nickName: nickNameLabel.text!, gender: GenderSegment.titleForSegment(at: GenderSegment.selectedSegmentIndex)!), credentials: Credentials(password: Password(value: PasswordLabel.text!)))
             FuncController.shared.RegisterFunc(registerdata: RegisterUserData) { (receiving) in
                 switch receiving{
                 case .success(let RegisterReceive):

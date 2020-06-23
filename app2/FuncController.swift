@@ -19,7 +19,7 @@ class FuncController{
                urlRequest.httpMethod = "POST"
                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                let jsonEncoder=JSONEncoder()
-               if let data=try?jsonEncoder.encode(trylogin){
+               if let data=try?jsonEncoder.encode(trylogin2){
                     urlRequest.httpBody=data
                     URLSession.shared.dataTask(with: urlRequest) { (rdata, response, error) in
                         print("******")

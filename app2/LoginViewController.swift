@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         
     }
     @IBAction func LoginBtn(_ sender: Any) {
-        FuncController.shared.LoginFunc(Email: trylogin.username, Password: trylogin.password) { (recieving) in
+        FuncController.shared.LoginFunc(Email: UserNameTF.text!, Password: PasswordTF.text!) { (recieving) in
             switch recieving{
             case .success(let logindata):
                 print(logindata)
