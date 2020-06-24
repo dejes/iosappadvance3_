@@ -77,7 +77,7 @@ struct SelfPage:Codable {
 }
 struct UploadImageResult: Decodable {
     struct Data: Decodable {
-        let link: URL
+        let link: URL?
     }
     let data: Data
 }
@@ -90,6 +90,31 @@ struct pwdreturn:Codable {
     struct pp:Codable {
     }
 }
+struct PostsThings:Codable{
+    
+    var data:data
+    struct data:Codable{
+        var posts:String?
+        var pic1:String?
+        var pic2:String?
+        var Location:String?
+        var Time:String?
+        var userid:String?
+    }
+
+}
+struct sheetDB_GETdata:Codable{
+    var posts:String?
+    var pic1:String?
+    var pic2:String?
+    var Location:String?
+    var Time:String?
+    var userid:String?
+}
+struct sheetDBreturn:Decodable {
+    var created:Int?
+}
+
 var trylogin=LoginDetails()
 var LoginData=logindata(data: trylogin)
 //var tryrecieve=retd()

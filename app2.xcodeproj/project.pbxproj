@@ -8,8 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		A1112F8524890F3800453FDE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A1112F8424890F3800453FDE /* Alamofire */; };
-		A111DBE224A0E81200B762A7 /* TableViewCellwithCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111DBE124A0E81200B762A7 /* TableViewCellwithCollectionViewCell.swift */; };
-		A111DBE424A1971500B762A7 /* SelfpostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111DBE324A1971500B762A7 /* SelfpostsTableViewController.swift */; };
+		A111DBE624A1DFEC00B762A7 /* MyPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111DBE524A1DFEC00B762A7 /* MyPostsTableViewController.swift */; };
+		A111DBE824A1E21500B762A7 /* MyPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111DBE724A1E21500B762A7 /* MyPostsTableViewCell.swift */; };
+		A111DBEA24A1E6FD00B762A7 /* WritePostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111DBE924A1E6FD00B762A7 /* WritePostsTableViewController.swift */; };
+		A111DBED24A1EA9300B762A7 /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = A111DBEC24A1EA9300B762A7 /* KingfisherDynamic */; };
+		A111DBEE24A1EA9300B762A7 /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = A111DBEC24A1EA9300B762A7 /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A111DBF024A1EA9300B762A7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A111DBEF24A1EA9300B762A7 /* Kingfisher */; };
+		A111DBF224A1EA9300B762A7 /* KingfisherStatic in Frameworks */ = {isa = PBXBuildFile; productRef = A111DBF124A1EA9300B762A7 /* KingfisherStatic */; };
+		A111DBF724A1FBEE00B762A7 /* MyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111DBF624A1FBEE00B762A7 /* MyPostViewModel.swift */; };
+		A111DBF924A2E95700B762A7 /* imgurupload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111DBF824A2E95700B762A7 /* imgurupload.swift */; };
 		A1B45F992455C2C300BEB66B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B45F982455C2C300BEB66B /* AppDelegate.swift */; };
 		A1B45F9B2455C2C300BEB66B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B45F9A2455C2C300BEB66B /* SceneDelegate.swift */; };
 		A1B45F9D2455C2C300BEB66B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B45F9C2455C2C300BEB66B /* ViewController.swift */; };
@@ -44,9 +51,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A111DBF324A1EA9300B762A7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A111DBEE24A1EA9300B762A7 /* KingfisherDynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		A111DBE124A0E81200B762A7 /* TableViewCellwithCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellwithCollectionViewCell.swift; sourceTree = "<group>"; };
-		A111DBE324A1971500B762A7 /* SelfpostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelfpostsTableViewController.swift; path = ../SelfpostsTableViewController.swift; sourceTree = "<group>"; };
+		A111DBE524A1DFEC00B762A7 /* MyPostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsTableViewController.swift; sourceTree = "<group>"; };
+		A111DBE724A1E21500B762A7 /* MyPostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsTableViewCell.swift; sourceTree = "<group>"; };
+		A111DBE924A1E6FD00B762A7 /* WritePostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostsTableViewController.swift; sourceTree = "<group>"; };
+		A111DBF624A1FBEE00B762A7 /* MyPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewModel.swift; sourceTree = "<group>"; };
+		A111DBF824A2E95700B762A7 /* imgurupload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imgurupload.swift; sourceTree = "<group>"; };
 		A1B45F952455C2C300BEB66B /* app2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B45F982455C2C300BEB66B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1B45F9A2455C2C300BEB66B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +99,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A111DBF024A1EA9300B762A7 /* Kingfisher in Frameworks */,
+				A111DBED24A1EA9300B762A7 /* KingfisherDynamic in Frameworks */,
+				A111DBF224A1EA9300B762A7 /* KingfisherStatic in Frameworks */,
 				A1112F8524890F3800453FDE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +126,7 @@
 		A1B45F8C2455C2C300BEB66B = {
 			isa = PBXGroup;
 			children = (
+				A111DBF824A2E95700B762A7 /* imgurupload.swift */,
 				A1B45F972455C2C300BEB66B /* app2 */,
 				A1B45FAE2455C2C600BEB66B /* app2Tests */,
 				A1B45FB92455C2C700BEB66B /* app2UITests */,
@@ -123,14 +151,16 @@
 				A1B45F9A2455C2C300BEB66B /* SceneDelegate.swift */,
 				A1B45F9C2455C2C300BEB66B /* ViewController.swift */,
 				A1B45F9E2455C2C300BEB66B /* Main.storyboard */,
-				A111DBE324A1971500B762A7 /* SelfpostsTableViewController.swift */,
-				A111DBE124A0E81200B762A7 /* TableViewCellwithCollectionViewCell.swift */,
+				A111DBE524A1DFEC00B762A7 /* MyPostsTableViewController.swift */,
+				A111DBE924A1E6FD00B762A7 /* WritePostsTableViewController.swift */,
+				A111DBE724A1E21500B762A7 /* MyPostsTableViewCell.swift */,
 				A1B45FD6245B0CAF00BEB66B /* SignupViewController.swift */,
 				A1B45FD2245AFC8200BEB66B /* ProfileTableViewController.swift */,
 				A1B45FD4245AFD0D00BEB66B /* ProfileTableViewCell.swift */,
 				A1B45FC82455D1E500BEB66B /* LoginViewController.swift */,
 				A1B45FD0245977C800BEB66B /* PersonalPageViewController.swift */,
 				A1B45FCA2455D6AD00BEB66B /* Details.swift */,
+				A111DBF624A1FBEE00B762A7 /* MyPostViewModel.swift */,
 				A1B45FA12455C2C600BEB66B /* Assets.xcassets */,
 				A1B45FA32455C2C600BEB66B /* LaunchScreen.storyboard */,
 				A1B45FA62455C2C600BEB66B /* Info.plist */,
@@ -167,6 +197,7 @@
 				A1B45F912455C2C300BEB66B /* Sources */,
 				A1B45F922455C2C300BEB66B /* Frameworks */,
 				A1B45F932455C2C300BEB66B /* Resources */,
+				A111DBF324A1EA9300B762A7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,6 +206,9 @@
 			name = app2;
 			packageProductDependencies = (
 				A1112F8424890F3800453FDE /* Alamofire */,
+				A111DBEC24A1EA9300B762A7 /* KingfisherDynamic */,
+				A111DBEF24A1EA9300B762A7 /* Kingfisher */,
+				A111DBF124A1EA9300B762A7 /* KingfisherStatic */,
 			);
 			productName = app2;
 			productReference = A1B45F952455C2C300BEB66B /* app2.app */;
@@ -250,6 +284,7 @@
 			mainGroup = A1B45F8C2455C2C300BEB66B;
 			packageReferences = (
 				A1112F8324890F3800453FDE /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A111DBEB24A1EA9300B762A7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = A1B45F962455C2C300BEB66B /* Products */;
 			projectDirPath = "";
@@ -296,16 +331,19 @@
 			files = (
 				A1B45FC92455D1E500BEB66B /* LoginViewController.swift in Sources */,
 				A1B45FCB2455D6AD00BEB66B /* Details.swift in Sources */,
-				A111DBE224A0E81200B762A7 /* TableViewCellwithCollectionViewCell.swift in Sources */,
 				A1B45FD7245B0CAF00BEB66B /* SignupViewController.swift in Sources */,
 				A1B45F9D2455C2C300BEB66B /* ViewController.swift in Sources */,
+				A111DBE624A1DFEC00B762A7 /* MyPostsTableViewController.swift in Sources */,
 				A1B45FD5245AFD0D00BEB66B /* ProfileTableViewCell.swift in Sources */,
 				A1B45F992455C2C300BEB66B /* AppDelegate.swift in Sources */,
+				A111DBE824A1E21500B762A7 /* MyPostsTableViewCell.swift in Sources */,
+				A111DBF724A1FBEE00B762A7 /* MyPostViewModel.swift in Sources */,
 				A1B45F9B2455C2C300BEB66B /* SceneDelegate.swift in Sources */,
 				A1B45FD1245977C800BEB66B /* PersonalPageViewController.swift in Sources */,
 				A1B45FD3245AFC8200BEB66B /* ProfileTableViewController.swift in Sources */,
+				A111DBF924A2E95700B762A7 /* imgurupload.swift in Sources */,
 				A1B45FCF2458611A00BEB66B /* FuncController.swift in Sources */,
-				A111DBE424A1971500B762A7 /* SelfpostsTableViewController.swift in Sources */,
+				A111DBEA24A1E6FD00B762A7 /* WritePostsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +680,14 @@
 				minimumVersion = 5.2.1;
 			};
 		};
+		A111DBEB24A1EA9300B762A7 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.14.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -649,6 +695,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A1112F8324890F3800453FDE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		A111DBEC24A1EA9300B762A7 /* KingfisherDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A111DBEB24A1EA9300B762A7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherDynamic;
+		};
+		A111DBEF24A1EA9300B762A7 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A111DBEB24A1EA9300B762A7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		A111DBF124A1EA9300B762A7 /* KingfisherStatic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A111DBEB24A1EA9300B762A7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherStatic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

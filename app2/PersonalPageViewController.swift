@@ -83,7 +83,7 @@ class PersonalPageViewController: UIViewController, UIImagePickerControllerDeleg
             switch response.result {
             case .success(let result):
                 print(result.data.link)
-                let upurl = result.data.link.absoluteString
+                let upurl = result.data.link!.absoluteString
                 let selfpage=SelfPage(profile: SelfPage.profiledecode(profileImg: upurl))
                 FuncController.shared.updateprofile(selfpage: selfpage, userid: self.userid!) { (receiving) in
                     switch receiving{
