@@ -32,6 +32,8 @@
 		A1B45FD3245AFC8200BEB66B /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B45FD2245AFC8200BEB66B /* ProfileTableViewController.swift */; };
 		A1B45FD5245AFD0D00BEB66B /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B45FD4245AFD0D00BEB66B /* ProfileTableViewCell.swift */; };
 		A1B45FD7245B0CAF00BEB66B /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B45FD6245B0CAF00BEB66B /* SignupViewController.swift */; };
+		A1FE4C8C24A42E6200D16321 /* OthersPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE4C8B24A42E6200D16321 /* OthersPostsTableViewController.swift */; };
+		A1FE4C8E24A439A300D16321 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE4C8D24A439A300D16321 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		A1B45FD2245AFC8200BEB66B /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		A1B45FD4245AFD0D00BEB66B /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A1B45FD6245B0CAF00BEB66B /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		A1FE4C8B24A42E6200D16321 /* OthersPostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPostsTableViewController.swift; sourceTree = "<group>"; };
+		A1FE4C8D24A439A300D16321 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,8 @@
 		A1B45F8C2455C2C300BEB66B = {
 			isa = PBXGroup;
 			children = (
+				A1FE4C8D24A439A300D16321 /* SearchViewController.swift */,
+				A1FE4C8B24A42E6200D16321 /* OthersPostsTableViewController.swift */,
 				A111DBF824A2E95700B762A7 /* imgurupload.swift */,
 				A1B45F972455C2C300BEB66B /* app2 */,
 				A1B45FAE2455C2C600BEB66B /* app2Tests */,
@@ -332,7 +338,9 @@
 				A1B45FC92455D1E500BEB66B /* LoginViewController.swift in Sources */,
 				A1B45FCB2455D6AD00BEB66B /* Details.swift in Sources */,
 				A1B45FD7245B0CAF00BEB66B /* SignupViewController.swift in Sources */,
+				A1FE4C8E24A439A300D16321 /* SearchViewController.swift in Sources */,
 				A1B45F9D2455C2C300BEB66B /* ViewController.swift in Sources */,
+				A1FE4C8C24A42E6200D16321 /* OthersPostsTableViewController.swift in Sources */,
 				A111DBE624A1DFEC00B762A7 /* MyPostsTableViewController.swift in Sources */,
 				A1B45FD5245AFD0D00BEB66B /* ProfileTableViewCell.swift in Sources */,
 				A1B45F992455C2C300BEB66B /* AppDelegate.swift in Sources */,

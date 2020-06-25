@@ -51,78 +51,84 @@ class WritePostsTableViewController: UITableViewController, UIImagePickerControl
         return 0
     }*/
     @IBOutlet weak var testimage: UIImageView!
-    @IBAction func ToPost(_ sender: Any) {
+    @IBAction func Topost(_ sender: Any) {
         let currentDate = Date()
-        let dataFormatter = DateFormatter() //實體化日期格式化物件
-        dataFormatter.dateFormat = "YYYY-MM-dd hh:mm a"
-        let stringDate = dataFormatter.string(from: currentDate)
-        let PostTexts = PostTextView.text
-        
-        let P1=imgurPost(image: UploadImages[0].imageView!.image!)
-        let P2=imgurPost(image: UploadImages[1].imageView!.image!)
-       
-        if PostTexts != ""{
-            if changePic[0]==true && changePic[1]==true {
-                cancellable=Publishers.Zip(P1,P2).receive(on:DispatchQueue.main).sink(receiveCompletion: { (ouo) in
-                    print(ouo)
-                }, receiveValue: { [weak self](values) in
-                    if let link1 = values.0.data.link, let link2 = values.1.data.link{
-                        self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: link2.absoluteString, Location: "", Time: stringDate, userid: self?.userid)))
-                    }
-                    })
-            }
-            else if changePic[0]==true{
-                cancellable = P1.receive(on: DispatchQueue.main).sink(receiveCompletion: { (finisg) in
-                    print("finish")
-                }, receiveValue: {[weak self] (values) in
-                    if let link1 = values.data.link{
-                        self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: "", Location: "", Time: stringDate, userid: self?.userid)))
-                    }
-                })
-            }
-            else if changePic[0]==false{
-                upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1: "" , pic2: "", Location: "", Time: stringDate, userid: self.userid)))
-            }
-            
-        }
-        else{
-            if changePic[0]==true && changePic[1]==true {
-                cancellable=Publishers.Zip(P1,P2).receive(on:DispatchQueue.main).sink(receiveCompletion: { (ouo) in
-                    print(ouo)
-                }, receiveValue: { [weak self](values) in
-                    if let link1 = values.0.data.link, let link2 = values.1.data.link{
-                        self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: link2.absoluteString, Location: "", Time: stringDate, userid: self?.userid)))
-                    }
-                    })
-            }
-            else if changePic[0]==true{
-                cancellable = P1.receive(on: DispatchQueue.main).sink(receiveCompletion: { (finisg) in
-                    print("finish")
-                }, receiveValue: {[weak self] (values) in
-                    if let link1 = values.data.link{
-                        self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: "", Location: "", Time: stringDate, userid: self?.userid)))
-                    }
-                })
-            }
-                
-            else if changePic[0]==false{
-                DispatchQueue.main.async {
-                     let AController=UIAlertController(title: "Error", message: "Type something to share your feeling!", preferredStyle: .alert)
-                     let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
-                     AController.addAction(okAction)
-                     self.present(AController, animated: true, completion: nil)
-                }
-            }
-            
-        }
-                
+         let dataFormatter = DateFormatter() //實體化日期格式化物件
+         dataFormatter.dateFormat = "YYYY-MM-dd hh:mm a"
+         let stringDate = dataFormatter.string(from: currentDate)
+         let PostTexts = PostTextView.text
          
-   
+         let P1=imgurPost(image: UploadImages[0].imageView!.image!)
+         let P2=imgurPost(image: UploadImages[1].imageView!.image!)
         
-       
-        
-        
-        
+         if PostTexts != ""{
+             if changePic[0]==true && changePic[1]==true {
+                
+                cancellable=Publishers.Zip(P1,P2).receive(on:DispatchQueue.main).sink(receiveCompletion: { (ouo) in
+                    
+                     print("ouo")
+                     
+                 }, receiveValue: { [weak self](values) in
+                     if let link1 = values.0.data.link, let link2 = values.1.data.link{
+                        self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: link2.absoluteString, Location: "", Time: stringDate, userid: self?.userid)))
+                        
+                        self!.performSegue(withIdentifier: "backsegue", sender: nil)
+                     }
+                    })
+                print("0.0")
+                
+             }
+             else if changePic[0]==true{
+                 cancellable = P1.receive(on: DispatchQueue.main).sink(receiveCompletion: { (finisg) in
+                     print("finish")
+
+                 }, receiveValue: {[weak self] (values) in
+                     if let link1 = values.data.link{
+                         self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: "", Location: "", Time: stringDate, userid: self?.userid)))
+                     }
+                    self!.performSegue(withIdentifier: "backsegue", sender: nil)
+                 })
+             }
+             else if changePic[0]==false{
+                 upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1: "" , pic2: "", Location: "", Time: stringDate, userid: self.userid)))
+                self.performSegue(withIdentifier: "backsegue", sender: nil)
+             }
+             
+         }
+         else{
+             if changePic[0]==true && changePic[1]==true {
+                 cancellable=Publishers.Zip(P1,P2).receive(on:DispatchQueue.main).sink(receiveCompletion: { (ouo) in
+                     print(ouo)
+                 }, receiveValue: { [weak self](values) in
+                     if let link1 = values.0.data.link, let link2 = values.1.data.link{
+                         self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: link2.absoluteString, Location: "", Time: stringDate, userid: self?.userid)))
+                     }
+                    self!.performSegue(withIdentifier: "backsegue", sender: nil)
+                     })
+                 //performSegue(withIdentifier: "backsegue", sender: nil)
+             }
+             else if changePic[0]==true{
+                 cancellable = P1.receive(on: DispatchQueue.main).sink(receiveCompletion: { (finisg) in
+                     print("finish")
+                 }, receiveValue: {[weak self] (values) in
+                     if let link1 = values.data.link{
+                         self!.upsheetDB(Mypost: PostsThings(data: PostsThings.data(posts: PostTexts, pic1:link1.absoluteString , pic2: "", Location: "", Time: stringDate, userid: self?.userid)))
+                     }
+                    self!.performSegue(withIdentifier: "backsegue", sender: nil)
+                 })
+                // performSegue(withIdentifier: "backsegue", sender: nil)
+             }
+                 
+             else if changePic[0]==false{
+                 DispatchQueue.main.async {
+                      let AController=UIAlertController(title: "Error", message: "Type something to share your feeling!", preferredStyle: .alert)
+                      let okAction=UIAlertAction(title: "ok", style: .default, handler: nil)
+                      AController.addAction(okAction)
+                      self.present(AController, animated: true, completion: nil)
+                 }
+             }
+             
+         }
     }
     
     func upsheetDB(Mypost:PostsThings) {
@@ -146,7 +152,8 @@ class WritePostsTableViewController: UITableViewController, UIImagePickerControl
             }
         }.resume()
     }
-
+    
+    //func upsheetDBPublisher
     func imgurPost(image:UIImage) -> AnyPublisher<UploadImageResult,Error>{
         //let base64Image:String = imageToBase64String(image)!
         let imageData = image.pngData()
@@ -244,14 +251,18 @@ class WritePostsTableViewController: UITableViewController, UIImagePickerControl
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
+/*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-    }
-    */
+        if segue.identifier="backsegue"{
+            let controller = segue.destination as! MyPostsTableViewController
+            
+        }
+    }*/
+    
 
 }
